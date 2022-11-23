@@ -1,23 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PrimaryButton from '../../../Components/Button/PrimaryButton';
+import logo from '../../../assets/logo-dark.png'
 
 const Header = () => {
 
     const headerItems = () => {
         return <>
-            <li className='mr-5'><Link to='/home'>Home</Link></li>
-            <li className='mr-5'><Link to='/login'>Login</Link></li>
-            <li className='mr-5'><Link to='/register'>Register</Link></li>
-            <li className='mr-5'><Link to='/dashboad'>Dashboad</Link></li>
-            <li className='mr-5'><Link to='/my-products'>My products</Link></li>
-            <li className='mr-5'><Link to='/add-product'>Add product</Link></li>
-            <li className='mr-5'><Link to='/my-orders'>My orders</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/home'>Home</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/login'>Login</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/register'>Register</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/dashboad'>Dashboad</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/my-products'>My products</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/add-product'>Add product</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/my-orders'>My orders</Link></li>
         </>
     }
     return (
         <div>
-            <div className="navbar bg-base-100 px-20">
+            <div className="navbar bg-base-100 lg:py-5 lg:px-20">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,7 +30,9 @@ const Header = () => {
                             }
                         </ul>
                     </div>
-                    <a href='/' className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <Link to='/' className="normal-case text-xl">
+                        <img className='w-48' src={logo} alt="logo" />
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
