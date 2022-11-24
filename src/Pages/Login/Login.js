@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+const googlePrivider = new GoogleAuthProvider()
+const githubProvider = new GithubAuthProvider()
 
 const Login = () => {
     useTitle('login')
-    const { loginUser } = useContext(AuthContext)
+    const { loginUser, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
 
@@ -23,6 +26,21 @@ const Login = () => {
 
 
     }
+
+    /* Sing in with google here */
+    const handleSignInWithGoogle = () => {
+        signInWithProvider(googlePrivider).then(res => {
+            console.log(res.user)
+        }).catch(e => console.log(e))
+    }
+
+
+
+    const handleSignInWithGithub = () => {
+        signInWithProvider(githubProvider).then(res => {
+            console.log(res.user)
+        }).catch(e => console.log(e))
+    }
     return (
         <div className="hero min-h-screen">
             <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">
@@ -32,7 +50,7 @@ const Login = () => {
                 <div>
                     <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body text-start">
                         <div className="form-control">
-                            <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered" />
+                            <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered text-secondary" />
                             <p className='text-red-800 font-medium text-start mt-1'>{errors.email?.message}</p>
                         </div>
                         <div className="form-control">
@@ -50,8 +68,8 @@ const Login = () => {
                         </div>
                     </form>
                     <div className=' text-white flex flex-col lg:flex-row justify-center gap-5 label-text-alt text-xl'>
-                        <button className='flex justify-center items-center'><FaGoogle className='mr-3'></FaGoogle> continue with</button>
-                        <button className='flex justify-center items-center'><FaGithub className='mr-3'></FaGithub> continue with</button>
+                        <button onClick={handleSignInWithGoogle} className='flex justify-center items-center'><FaGoogle className='mr-3'></FaGoogle> continue with</button>
+                        <button onClick={handleSignInWithGithub} className='flex justify-center items-center'><FaGithub className='mr-3'></FaGithub> continue with</button>
                     </div>
                 </div>
             </div>

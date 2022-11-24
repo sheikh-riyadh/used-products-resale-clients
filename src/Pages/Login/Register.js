@@ -9,20 +9,40 @@ import toast from 'react-hot-toast';
 
 const Register = () => {
     useTitle('register')
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const handleOnSubmit = (data) => {
-        const { email, password, userImage } = data
+        const { email, password, userImage, name } = data
 
         const image = userImage[0]
+        console.log(image)
         const formData = new FormData()
         formData.append('image', image)
+
+
         /* Create user here */
-        createUser(email, password).then(res => {
-            toast.success("Register successfull")
-            reset()
-        }).catch(e => console.error(e))
+        createUser(email, password)
+            .then(res => {
+                toast.success("Register successfull")
+                reset()
+                /* Calling imagebb api here  */
+                fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageBB_api}`, {
+                    method: 'POST',
+                    body: formData
+                }).then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            const photo = data?.data?.display_url;
+
+                            /* User profile update here*/
+                            updateUserProfile(name, photo).then(() => {
+                                console.log('user updated')
+                            }).catch(e => console.log(e))
+                        }
+                    }).catch(e => console.log(e))
+
+            }).catch(e => console.error(e))
     }
     return (
         <div className="hero min-h-screen my-10">
@@ -33,11 +53,11 @@ const Register = () => {
                 <div>
                     <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body text-start">
                         <div className="form-control">
-                            <input {...register('name', { required: 'Field is required' })} type="name" placeholder="name" className="input input-bordered" />
+                            <input {...register('name', { required: 'Field is required' })} type="name" placeholder="name" className="input input-bordered text-secondary" />
                             <p className='text-red-800 font-medium text-start mt-1'>{errors.name?.message}</p>
                         </div>
                         <div className="form-control">
-                            <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered" />
+                            <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered text-secondary" />
                             <p className='text-red-800 font-medium text-start mt-1'>{errors.email?.message}</p>
                         </div>
                         <div className="form-control">
