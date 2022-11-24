@@ -4,26 +4,29 @@ import { Link } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const Register = () => {
     useTitle('register')
     const { createUser } = useContext(AuthContext)
-    const { register, formState: { errors }, handleSubmit } = useForm();
-
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const handleOnSubmit = (data) => {
-        const { email, password } = data
+        const { email, password, userImage } = data
 
+        const image = userImage[0]
+        const formData = new FormData()
+        formData.append('image', image)
         /* Create user here */
         createUser(email, password).then(res => {
-            const user = res.user;
-            console.log(user)
+            toast.success("Register successfull")
+            reset()
         }).catch(e => console.error(e))
     }
     return (
         <div className="hero min-h-screen my-10">
-            <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[400px]">
+            <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">
                 <div className="text-center">
                     <h1 className="text-4xl lg:text-5xl font-bold">Register</h1>
                 </div>
@@ -46,7 +49,7 @@ const Register = () => {
                         </div>
                         <div className="form-control">
                             <select {...register('role')} className='select select-bordered w-full text-secondary' defaultValue={'Seller'} >
-                                <option selected disabled>Make seller or buyer</option>
+                                <option disabled>Make seller or buyer</option>
                                 <option value="Seller">Seller</option>
                                 <option value="Buyer">Buyer</option>
                             </select>
@@ -58,8 +61,8 @@ const Register = () => {
                         </div>
                         <div>
                             <label>
-                                <p className="text-white label-text-alt inline">Already have an account?</p>
-                                <Link className='text-white label-text-alt ml-2 link link-hover'>Login</Link>
+                                <p className="text-white label-text-alt text-lg inline">Already have an account?</p>
+                                <Link to='/login' className='text-white label-text-alt text-lg ml-2 link link-hover'>Login</Link>
                             </label>
                         </div>
                         <div className="form-control mt-6">
