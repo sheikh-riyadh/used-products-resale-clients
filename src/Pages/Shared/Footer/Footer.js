@@ -4,7 +4,7 @@ import logo from '../../../assets/logo-light.png'
 const Footer = () => {
     return (
         <div className='bg-footer-image bg-cover bg-no-repeat bg-center'>
-            <footer className="p-5 lg:p-20 bg-black bg-opacity-90 text-base-content">
+            <footer className="p-5 lg:px-20 bg-black bg-opacity-90 text-base-content">
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5 text-start justify-center'>
                     <div className='text-white md:p-10 text-start'>
                         <img className='w-48' src={logo} alt="logo" />
@@ -40,12 +40,12 @@ const Footer = () => {
                 <div className='rounded-md bg-secondary bg-opacity-20 p-10 text-white md:p-10 text-start'>
                     <h2>ARE YOU LOOKING FOR A CAR?</h2>
                     <p>Search Our Inventory With Thousands Of Cars And More Cars Are Adding On Daily Basis</p>
-                    <button className=' mt-5 hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white md:p-10 btn border-0'> readm more</button>
+                    <button className='mt-5 hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'> readm more</button>
                 </div>
                 <div className='rounded-md bg-secondary bg-opacity-20 p-10 text-white md:p-10 text-start'>
                     <h2>DO YOU WANT TO SELL A CAR?</h2>
                     <p>Search Our Inventory With Thousands Of Cars And More Cars Are Adding On Daily Basis</p>
-                    <button className=' mt-5 hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white md:p-10 btn border-0'> readm more</button>
+                    <button className='mt-5 hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white  btn border-0'> readm more</button>
                 </div>
             </div>
         </div>
