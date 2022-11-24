@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import Spinner from '../../../../Components/Spinner/Spinner';
 import Category from './Category';
 
+
 const Categories = () => {
 
 
@@ -19,7 +20,7 @@ const Categories = () => {
     }
     return (
         <div className='px-5 lg:px-20'>
-            <h2 className='my-5 text-5xl font-bold'>Category</h2>
+            <h2 className='my-5 text-3xl lg:text-5xl font-bold'>Category</h2>
             <div>
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-2/12 m-0 p-0"></div>
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-1/12 m-0 p-0"></div>

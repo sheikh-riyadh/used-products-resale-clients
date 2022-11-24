@@ -1,10 +1,12 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa'
 
+
 const Category = ({ category }) => {
     const { categoryName, image, rating } = category
     return (
         <div>
+
             <div className="card card-compact bg-slate-100 shadow-xl">
                 <figure><img className='w-full' src={image} alt="categoryImage" /></figure>
                 <div className="card-body">

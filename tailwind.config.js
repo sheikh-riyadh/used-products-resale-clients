@@ -19,7 +19,9 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'banner': "url('/src/assets/banner.jpg')"
+        'banner': "url('/src/assets/banner.jpg')",
+        'wave-shape': "url('/src/assets/wave-shape.svg')",
+        'footer-image': "url('/src/assets/footer-bg.jpg')",
       }
     },
   },
