@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import car from '../../../assets/red-car.png'
-import PrimaryButton from '../../../Components/Button/PrimaryButton';
+import car from '../../../../assets/red-car.png'
 
 const Banner = () => {
     return (
@@ -15,7 +14,7 @@ const Banner = () => {
                         <Link className='bg-gradient-to-r from-primary to-red-500 text-white px-4 py-1 rounded-md border-0'>get start</Link>
                     </div>
                     <div className='hidden lg:block'>
-                        <PrimaryButton>Let's get started</PrimaryButton>
+                        <button className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Let get started</button>
                     </div>
                 </div>
                 <div className='lg:col-span-8 mt-28'>
