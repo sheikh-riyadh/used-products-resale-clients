@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import BookingModal from '../../Components/Modal/BookingModal';
 import Product from './Product';
 
 const CategoryProducts = () => {
 
+    const [modalDetails, setModalDetails] = useState(null)
     const categoryProducts = useLoaderData()
-
     return (
         <div>
             <div className='bg-black'>
@@ -23,11 +24,15 @@ const CategoryProducts = () => {
                     categoryProducts.map(product => <Product
                         key={product._id}
                         product={product}
+                        setModalDetails={setModalDetails}
                     ></Product>)
                 }
                 <Link to='/home' className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Back to categories</Link>
-            </div>
 
+            </div>
+            {modalDetails && <BookingModal
+                modalDetails={modalDetails}
+            ></BookingModal>}
         </div>
     );
 };

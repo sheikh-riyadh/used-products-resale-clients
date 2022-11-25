@@ -59,7 +59,12 @@ const Register = () => {
                         }
                     }).catch(e => console.log(e))
 
-            }).catch(e => console.error(e))
+            }).catch(e => {
+                if (e.message === 'Firebase: Error (auth/email-already-in-use).') {
+                    toast.error('User already registered')
+                    reset()
+                }
+            })
     }
     return (
         <div className="hero min-h-screen my-10">

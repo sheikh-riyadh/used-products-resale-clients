@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
@@ -13,6 +13,9 @@ const Login = () => {
     const { loginUser, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
 
     const handleOnSubmit = (data) => {
         const { email, password } = data
@@ -20,7 +23,7 @@ const Login = () => {
 
         /* Create user here */
         loginUser(email, password).then(res => {
-            console.log(res.user)
+            navigate(from, { replace: true })
             reset()
         }).catch(e => console.error(e))
 
@@ -30,7 +33,7 @@ const Login = () => {
     /* Sing in with google here */
     const handleSignInWithGoogle = () => {
         signInWithProvider(googlePrivider).then(res => {
-            console.log(res.user)
+            navigate(from, { replace: true })
         }).catch(e => console.log(e))
     }
 

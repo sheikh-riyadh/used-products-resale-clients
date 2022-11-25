@@ -1,8 +1,11 @@
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
-const Product = ({ product }) => {
+const Product = ({ product, setModalDetails }) => {
     const { categoryName, isVarify, postTime, userYears, originalPrice, resalePrice, productLocation, sellerName, carName, sellerPhoto, carPhoto, _id } = product
+
+
+
     return (
         <div>
             <div className='grid lg:grid-cols-12 ga my-5 shadow-xl rounded-xl'>
@@ -38,7 +41,7 @@ const Product = ({ product }) => {
                         </div>
                     </div>
                     <div className='flex justify-start mt-5 lg:justify-end'>
-                        <button className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Buy now</button>
+                        <label onClick={() => setModalDetails(product)} htmlFor="booking-modal" className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Buy now</label>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layouts/Main";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
+import Dashboad from "../../Pages/Dashboad/Dashboad";
 import Home from "../../Pages/Home/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Login/Register";
+import AdminRouter from "../AdminRouter/AdminRouter";
+import PrivateRouter from "../PrivateRouter/PrivateRouter";
 
 export const router = createBrowserRouter([
     {
@@ -25,8 +28,11 @@ export const router = createBrowserRouter([
                 element: <Register></Register>
             }, {
                 path: '/category-products/:id',
-                element: <CategoryProducts></CategoryProducts>,
+                element: <PrivateRouter><CategoryProducts></CategoryProducts></PrivateRouter>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_api_url}/category-products/${params.id}`)
+            }, {
+                path: '/dashboad',
+                element: <AdminRouter><Dashboad></Dashboad></AdminRouter>
             }
         ]
     }
