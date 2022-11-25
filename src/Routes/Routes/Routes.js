@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layouts/Main";
+import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import Home from "../../Pages/Home/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Login/Register";
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
             }, {
                 path: '/register',
                 element: <Register></Register>
+            }, {
+                path: '/category-products/:id',
+                element: <CategoryProducts></CategoryProducts>,
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_api_url}/category-products/${params.id}`)
             }
         ]
     }

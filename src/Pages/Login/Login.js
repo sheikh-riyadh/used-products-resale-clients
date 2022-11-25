@@ -35,7 +35,7 @@ const Login = () => {
     }
 
 
-
+    /* Sign in with github here */
     const handleSignInWithGithub = () => {
         signInWithProvider(githubProvider).then(res => {
             console.log(res.user)

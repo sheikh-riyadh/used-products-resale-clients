@@ -22,6 +22,7 @@ module.exports = {
         'banner': "url('/src/assets/banner.jpg')",
         'wave-shape': "url('/src/assets/wave-shape.svg')",
         'footer-image': "url('/src/assets/footer-bg.jpg')",
+        'category-image': "url('/src/assets/category-image.jpg')",
       }
     },
   },

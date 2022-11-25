@@ -13,7 +13,23 @@ const Register = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const handleOnSubmit = (data) => {
-        const { email, password, userImage, name } = data
+        const { email, password, userImage, name, userRole } = data
+
+        const user = {
+            name,
+            email,
+            userRole
+        }
+
+        const insertUser = () => {
+            fetch(`${process.env.REACT_APP_api_url}/users`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+        }
 
         const image = userImage[0]
         console.log(image)
@@ -26,6 +42,7 @@ const Register = () => {
             .then(res => {
                 toast.success("Register successfull")
                 reset()
+                insertUser()
                 /* Calling imagebb api here  */
                 fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageBB_api}`, {
                     method: 'POST',
@@ -68,12 +85,12 @@ const Register = () => {
                             <p className='text-red-800 font-medium text-start mt-1'>{errors.userImage?.message}</p>
                         </div>
                         <div className="form-control">
-                            <select {...register('role')} className='select select-bordered w-full text-secondary' defaultValue={'Seller'} >
+                            <select {...register('userRole')} className='select select-bordered w-full text-secondary' defaultValue={'Seller'} >
                                 <option disabled>Make seller or buyer</option>
                                 <option value="Seller">Seller</option>
                                 <option value="Buyer">Buyer</option>
                             </select>
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.role?.message}</p>
+                            <p className='text-red-800 font-medium text-start mt-1'>{errors.userRole?.message}</p>
                         </div>
                         <div className="form-control">
                             <input {...register('password', { required: 'Field is required' })} type="password" placeholder="password" className="input input-bordered text-secondary" />

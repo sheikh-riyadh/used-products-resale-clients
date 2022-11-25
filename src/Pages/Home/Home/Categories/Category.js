@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 
 
 const Category = ({ category }) => {
-    const { categoryName, image, rating } = category
+    const { categoryName, image, rating, _id } = category
     return (
         <div>
 
@@ -20,7 +21,7 @@ const Category = ({ category }) => {
                         {rating}
                     </p>
                     <div className="card-actions">
-                        <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0 w-full">Buy Now</button>
+                        <Link to={`/category-products/${_id}`} className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0 w-full">Buy Now</Link>
                     </div>
                 </div>
             </div>

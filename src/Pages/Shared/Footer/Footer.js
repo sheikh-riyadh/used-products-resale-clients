@@ -3,7 +3,7 @@ import logo from '../../../assets/logo-light.png'
 
 const Footer = () => {
     return (
-        <div className='bg-footer-image bg-cover bg-no-repeat bg-center'>
+        <div className='bg-footer-image bg-fixed bg-cover bg-no-repeat bg-center'>
             <footer className="p-5 lg:px-20 bg-black bg-opacity-90 text-base-content">
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5 text-start justify-center'>
                     <div className='text-white md:p-10 text-start'>
