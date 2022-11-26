@@ -5,6 +5,7 @@ import { useTitle } from '../../Hook/userTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
 const googlePrivider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
@@ -25,7 +26,15 @@ const Login = () => {
         loginUser(email, password).then(res => {
             navigate(from, { replace: true })
             reset()
-        }).catch(e => console.error(e))
+        }).catch(e => {
+            if (e.message === 'Firebase: Error (auth/wrong-password).') {
+                toast.error('Incorrect password')
+            } else if (e.message === 'Firebase: Error (auth/user-not-found).') {
+                toast.error('User not found please register')
+            }
+            console.log(e)
+            reset()
+        })
 
 
     }
@@ -44,6 +53,7 @@ const Login = () => {
             console.log(res.user)
         }).catch(e => console.log(e))
     }
+
     return (
         <div className="hero min-h-screen">
             <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">
@@ -67,7 +77,7 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">Register</button>
+                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">Login</button>
                         </div>
                     </form>
                     <div className=' text-white flex flex-col lg:flex-row justify-center gap-5 label-text-alt text-xl'>

@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
 
 const Header = () => {
-    const { logOutUser, user } = useContext(AuthContext)
+    const { logOutUser, user, loading } = useContext(AuthContext)
     const navigate = useNavigate()
     const handleLogOut = () => {
         logOutUser().then(() => {
@@ -21,11 +21,13 @@ const Header = () => {
             {
                 user?.uid ?
                     <>
-                        <li><button onClick={handleLogOut}>Log out</button></li>
+                        <li><button>{user?.displayName}</button></li>
                         <li className='mr2 lg:mr-5'><Link to='/dashboad'>Dashboad</Link></li>
+                        <li><label htmlFor="my-drawer-2" className=" drawer-button lg:hidden">User and buyer</label></li>
                         <li className='mr2 lg:mr-5'><Link to='/my-products'>My products</Link></li>
                         <li className='mr2 lg:mr-5'><Link to='/add-product'>Add product</Link></li>
                         <li className='mr2 lg:mr-5'><Link to='/my-orders'>My orders</Link></li>
+                        <li><button onClick={handleLogOut}>Log out</button></li>
                     </>
                     :
                     <>
@@ -54,7 +56,9 @@ const Header = () => {
                                     <label tabIndex={0} className="btn w-14 btn-primary btn-circle avatar">
                                         <div className="avatar">
                                             <div className=" w-full rounded-full">
-                                                <img src="https://placeimg.com/192/192/people" />
+                                                {
+                                                    loading ? <p>loading</p> : <img alt='/' src={user?.photoURL} />
+                                                }
                                             </div>
                                         </div>
                                     </label>

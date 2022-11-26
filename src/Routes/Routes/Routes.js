@@ -1,12 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboadLayout from "../../Layouts/DashboadLayout";
 import Main from "../../Layouts/Main";
+import MyOrders from "../../Pages/BuyerPage/MyOrders/MyOrders";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
-import Dashboad from "../../Pages/Dashboad/Dashboad";
 import Home from "../../Pages/Home/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Login/Register";
-import AdminRouter from "../AdminRouter/AdminRouter";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 
 export const router = createBrowserRouter([
@@ -36,11 +35,11 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboad',
-        element: <DashboadLayout></DashboadLayout>,
+        element: <PrivateRouter><DashboadLayout></DashboadLayout></PrivateRouter>,
         children: [
             {
                 path: '/dashboad',
-                element: <AdminRouter><Dashboad></Dashboad></AdminRouter>
+                element: <MyOrders></MyOrders>
             }
         ]
     }

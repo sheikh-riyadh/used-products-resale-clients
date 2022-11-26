@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider';
@@ -12,27 +12,13 @@ const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
+    const navigate = useNavigate()
     const handleOnSubmit = (data) => {
+
         const { email, password, userImage, name, userRole } = data
 
-        const user = {
-            name,
-            email,
-            userRole
-        }
-
-        const insertUser = () => {
-            fetch(`${process.env.REACT_APP_api_url}/users`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-        }
-
+        /* Get image from form */
         const image = userImage[0]
-        console.log(image)
         const formData = new FormData()
         formData.append('image', image)
 
@@ -40,9 +26,7 @@ const Register = () => {
         /* Create user here */
         createUser(email, password)
             .then(res => {
-                toast.success("Register successfull")
-                reset()
-                insertUser()
+
                 /* Calling imagebb api here  */
                 fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageBB_api}`, {
                     method: 'POST',
@@ -54,7 +38,25 @@ const Register = () => {
 
                             /* User profile update here*/
                             updateUserProfile(name, photo).then(() => {
-                                console.log('user updated')
+                                const user = {
+                                    name,
+                                    email,
+                                    userRole,
+                                    userPhoto: photo
+                                }
+                                fetch(`${process.env.REACT_APP_api_url}/user`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'content-type': 'application/json'
+                                    },
+                                    body: JSON.stringify(user)
+                                })
+                                    .then(res => res.json)
+                                    .then(data => {
+                                        toast.success("Register successfull")
+                                    }).catch(e => console.error(e))
+                                navigate('/')
+                                reset()
                             }).catch(e => console.log(e))
                         }
                     }).catch(e => console.log(e))
@@ -66,6 +68,7 @@ const Register = () => {
                 }
             })
     }
+
     return (
         <div className="hero min-h-screen my-10">
             <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">

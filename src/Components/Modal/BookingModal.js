@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
 
-const BookingModal = ({ modalDetails }) => {
+const BookingModal = ({ modalDetails, setModalDetails }) => {
     const { user } = useContext(AuthContext)
 
     const handleBooking = (event) => {
@@ -14,25 +15,29 @@ const BookingModal = ({ modalDetails }) => {
         const phone = form.phone.value;
         const meetLocation = form.meetLocation.value;
 
-        const buyer = {
+        const orders = {
             buyerName,
             buyerEmail,
             productName,
             productPrice,
             phone,
             meetLocation,
-            productID: modalDetails._id
+            productID: modalDetails._id,
+            carImage: modalDetails.carPhoto
         }
 
-        fetch(`${process.env.REACT_APP_api_url}/buyers`, {
+        fetch(`${process.env.REACT_APP_api_url}/orders`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(buyer)
+            body: JSON.stringify(orders)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                setModalDetails(null)
+                toast.success('Order successful')
+            })
 
     }
 
