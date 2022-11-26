@@ -42,9 +42,10 @@ const Register = () => {
                                     name,
                                     email,
                                     userRole,
-                                    userPhoto: photo
+                                    userImg: photo,
+                                    userVerify: false
                                 }
-                                fetch(`${process.env.REACT_APP_api_url}/user`, {
+                                fetch(`${process.env.REACT_APP_api_url}/users`, {
                                     method: 'POST',
                                     headers: {
                                         'content-type': 'application/json'
