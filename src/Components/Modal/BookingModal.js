@@ -57,7 +57,7 @@ const BookingModal = ({ modalDetails }) => {
                                 required type="text" readOnly className="input input-bordered" />
                         </div>
                         <div className="form-control mb-3">
-                            <input name='productPrice' disabled defaultValue={modalDetails?.resalePrice} required type="email" placeholder="Email address" className="input input-bordered" />
+                            <input name='productPrice' disabled value={`$${modalDetails?.resalePrice}`} required type="email" placeholder="Email address" className="input input-bordered" />
                         </div>
                         <div className="form-control mb-3">
                             <input name='phone' required type="number" placeholder="Phone" className="input input-bordered" />

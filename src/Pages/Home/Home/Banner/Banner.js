@@ -5,7 +5,7 @@ import car from '../../../../assets/red-car.png'
 const Banner = () => {
     return (
         <div className='bg-banner bg-cover'>
-            <div className='grid h-72 lg:min-h-screen grid-cols-2 lg:grid-cols-12 justify-center items-center px-5 lg:px-20'>
+            <div className='grid h-72 md:h-96 lg:min-h-screen grid-cols-2 lg:grid-cols-12 justify-center items-center px-5 lg:px-20'>
                 <div className='lg:col-span-4 mt-10 lg:mt-20 text-start'>
                     <h1 className='text-xl md:text-4xl lg:text-6xl'><span className='lg:text-7xl'>Need</span> some new <span className='lg:text-7xl'>Wheels</span>
                     </h1>

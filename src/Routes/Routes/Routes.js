@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboadLayout from "../../Layouts/DashboadLayout";
 import Main from "../../Layouts/Main";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import Dashboad from "../../Pages/Dashboad/Dashboad";
@@ -30,7 +31,14 @@ export const router = createBrowserRouter([
                 path: '/category-products/:id',
                 element: <PrivateRouter><CategoryProducts></CategoryProducts></PrivateRouter>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_api_url}/category-products/${params.id}`)
-            }, {
+            }
+        ]
+    },
+    {
+        path: '/dashboad',
+        element: <DashboadLayout></DashboadLayout>,
+        children: [
+            {
                 path: '/dashboad',
                 element: <AdminRouter><Dashboad></Dashboad></AdminRouter>
             }
