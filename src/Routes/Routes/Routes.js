@@ -3,11 +3,17 @@ import DashboadLayout from "../../Layouts/DashboadLayout";
 import Main from "../../Layouts/Main";
 import AllBuyers from "../../Pages/AdminPage/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/AdminPage/AllSellers/AllSellers";
+import MyOrders from "../../Pages/BuyerPage/MyOrders/MyOrders";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import Home from "../../Pages/Home/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Login/Register";
+import AddProduct from "../../Pages/SellerPage/AddProduct/AddProduct";
+import MyProducts from "../../Pages/SellerPage/MyProducts/MyProducts";
+import AdminRouter from "../AdminRouter/AdminRouter";
+import BuyerRouter from "../BuyerRouter/BuyerRouter";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
+import SellerRouter from "../SellerRouter/SellerRouter";
 
 export const router = createBrowserRouter([
     {
@@ -40,13 +46,22 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboad',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRouter><AllBuyers></AllBuyers></AdminRouter>
             }, {
                 path: '/dashboad/all-buyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRouter><AllBuyers></AllBuyers></AdminRouter>
             }, {
-                path: '/dashboad/all-seller',
-                element: <AllSellers></AllSellers>
+                path: '/dashboad/all-sellers',
+                element: <AdminRouter><AllSellers></AllSellers></AdminRouter>
+            }, {
+                path: '/dashboad/add-products',
+                element: <SellerRouter><AddProduct></AddProduct> </SellerRouter>
+            }, {
+                path: '/dashboad/my-products',
+                element: <SellerRouter><MyProducts></MyProducts></SellerRouter>
+            }, {
+                path: '/dashboad/my-orders',
+                element: <BuyerRouter><MyOrders></MyOrders></BuyerRouter>
             }
         ]
     }

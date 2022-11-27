@@ -2,19 +2,19 @@ import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import Spinner from '../../Components/Spinner/Spinner';
 import { AuthContext } from '../../context/AuthProvider';
-import useAdmin from '../../Hook/useAdmin';
+import useSeller from '../../Hook/useSeller';
 
-const AdminRouter = ({ children }) => {
+const BuyerRouter = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const location = useLocation()
-    const [admin, adminLoading] = useAdmin(user?.email)
-    if (loading || adminLoading) {
+    const [buyer, buyerLoading] = useSeller(user?.email)
+    if (loading || buyerLoading) {
         return <Spinner></Spinner>
     }
-    else if (user && admin) {
+    else if (user && buyer) {
         return children
     }
     return <Navigate to='/login' state={{ from: location }} replace></Navigate>
 };
 
-export default AdminRouter;
+export default BuyerRouter;

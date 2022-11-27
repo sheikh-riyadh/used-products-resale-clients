@@ -37,7 +37,6 @@ const Login = () => {
         /* Create user here */
         loginUser(email, password).then(res => {
             setUserEmail(email)
-            console.log(email)
             reset()
         }).catch(e => {
             if (e.message === 'Firebase: Error (auth/wrong-password).') {
@@ -63,7 +62,7 @@ const Login = () => {
     /* Sign in with github here */
     const handleSignInWithGithub = () => {
         signInWithProvider(githubProvider).then(res => {
-            console.log(res.user)
+
         }).catch(e => console.log(e))
     }
     return (

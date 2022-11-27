@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const AddProduct = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     return (
         <div>
             <div className="hero min-h-screen my-10">

@@ -15,7 +15,6 @@ const AllSellers = () => {
         }
     })
 
-    console.log(user)
     const handleVerify = (id) => {
         fetch(`${process.env.REACT_APP_api_url}/users/verify/${id}`, {
             method: 'PUT',
