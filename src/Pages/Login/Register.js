@@ -23,6 +23,14 @@ const Register = () => {
         formData.append('image', image)
 
 
+        /* Get access token */
+        const accessToken = email => {
+            fetch(`${process.env.REACT_APP_api_url}/jwt?email=${email}`)
+                .then(res => res.json()).then(data => {
+                    localStorage.setItem('accessToken', data.accessToken)
+                })
+        }
+
         /* Create user here */
         createUser(email, password)
             .then(res => {
@@ -43,7 +51,7 @@ const Register = () => {
                                     email,
                                     userRole,
                                     userImg: photo,
-                                    userVerify: false
+                                    userVerify: 'false'
                                 }
                                 fetch(`${process.env.REACT_APP_api_url}/users`, {
                                     method: 'POST',
@@ -55,6 +63,7 @@ const Register = () => {
                                     .then(res => res.json)
                                     .then(data => {
                                         toast.success("Register successfull")
+                                        accessToken(user.email)
                                     }).catch(e => console.error(e))
                                 navigate('/')
                                 reset()

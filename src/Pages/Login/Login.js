@@ -21,9 +21,17 @@ const Login = () => {
     const handleOnSubmit = (data) => {
         const { email, password } = data
 
+        /* Get access token */
+        const accessToken = email => {
+            fetch(`${process.env.REACT_APP_api_url}/jwt?email=${email}`)
+                .then(res => res.json()).then(data => {
+                    localStorage.setItem('accessToken', data.accessToken)
+                })
+        }
 
         /* Create user here */
         loginUser(email, password).then(res => {
+            accessToken(email)
             navigate(from, { replace: true })
             reset()
         }).catch(e => {

@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
+import Spinner from '../../../Components/Spinner/Spinner';
 
 const AllSellers = () => {
-    const { data: sellers } = useQuery({
+    const { data: sellers, isLoading, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_api_url}/users/sellers`)
@@ -10,6 +12,21 @@ const AllSellers = () => {
             return data
         }
     })
+
+    const handleVerify = (id) => {
+        fetch(`${process.env.REACT_APP_api_url}/users/verify/${id}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json()).then(data => {
+                toast.success('User verified success full')
+                refetch()
+            })
+    }
+
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -19,6 +36,8 @@ const AllSellers = () => {
                             <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Make verify</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +48,8 @@ const AllSellers = () => {
                                 <td><img className='w-16 h-16 rounded-full' src={seller.userImg} alt='car_image'></img></td>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
+                                <td><button onClick={() => handleVerify(seller._id)} className='hover:text-gray-100 bg-gradient-to-r from-green-300 to-green-500 text-white btn border-0' disabled={seller.userVerify === 'true'}>{seller.userVerify === 'true' ? 'verified' : 'Make seller verify'}</button></td>
+                                <td><button className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
