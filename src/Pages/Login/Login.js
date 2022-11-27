@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import { useToken } from '../../Hook/useToken';
 const googlePrivider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
@@ -13,26 +14,30 @@ const Login = () => {
     useTitle('login')
     const { loginUser, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
+    const [userEmail, setUserEmail] = useState('')
 
+
+    const [token] = useToken(userEmail)
+    /* Get location */
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/'
 
+    /* if (tokenLoading) {
+        return;
+    } */
+
+    if (token) {
+        navigate(from, { replace: true })
+    }
+    /* Get token from using useToken hook */
     const handleOnSubmit = (data) => {
         const { email, password } = data
 
-        /* Get access token */
-        const accessToken = email => {
-            fetch(`${process.env.REACT_APP_api_url}/jwt?email=${email}`)
-                .then(res => res.json()).then(data => {
-                    localStorage.setItem('accessToken', data.accessToken)
-                })
-        }
-
         /* Create user here */
         loginUser(email, password).then(res => {
-            accessToken(email)
-            navigate(from, { replace: true })
+            setUserEmail(email)
+            console.log(email)
             reset()
         }).catch(e => {
             if (e.message === 'Firebase: Error (auth/wrong-password).') {
@@ -61,7 +66,6 @@ const Login = () => {
             console.log(res.user)
         }).catch(e => console.log(e))
     }
-
     return (
         <div className="hero min-h-screen">
             <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">

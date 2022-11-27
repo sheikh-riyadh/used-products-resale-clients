@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import Spinner from '../../../Components/Spinner/Spinner';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const AllSellers = () => {
+    const { user } = useContext(AuthContext)
     const { data: sellers, isLoading, refetch } = useQuery({
-        queryKey: ['sellers'],
+        queryKey: ['sellers', user.email],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_api_url}/users/sellers`)
             const data = res.json()
@@ -13,6 +15,7 @@ const AllSellers = () => {
         }
     })
 
+    console.log(user)
     const handleVerify = (id) => {
         fetch(`${process.env.REACT_APP_api_url}/users/verify/${id}`, {
             method: 'PUT',
@@ -29,6 +32,7 @@ const AllSellers = () => {
 
     return (
         <div>
+            <h2 className='text-4xl font-bold my-5 lg:my-10'>All Sellers</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>

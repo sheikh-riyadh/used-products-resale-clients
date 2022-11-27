@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
 const AllBuyers = () => {
+
     const { data: buyers } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
@@ -10,9 +11,11 @@ const AllBuyers = () => {
             return data
         }
     })
+
     return (
         <div>
             <div>
+                <h2 className='text-4xl font-bold my-5 lg:my-10'>All buyers</h2>
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
                         <thead>

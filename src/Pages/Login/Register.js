@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
+import { useToken } from '../../Hook/useToken';
 
 
 const Register = () => {
@@ -12,24 +13,22 @@ const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
+    const [userEmail, setUserEmail] = useState('')
+    const [token] = useToken(userEmail)
     const navigate = useNavigate()
-    const handleOnSubmit = (data) => {
 
+    /* Get access token */
+    if (token) {
+        navigate('/')
+    }
+
+    const handleOnSubmit = (data) => {
         const { email, password, userImage, name, userRole } = data
 
         /* Get image from form */
         const image = userImage[0]
         const formData = new FormData()
         formData.append('image', image)
-
-
-        /* Get access token */
-        const accessToken = email => {
-            fetch(`${process.env.REACT_APP_api_url}/jwt?email=${email}`)
-                .then(res => res.json()).then(data => {
-                    localStorage.setItem('accessToken', data.accessToken)
-                })
-        }
 
         /* Create user here */
         createUser(email, password)
@@ -53,8 +52,9 @@ const Register = () => {
                                     userImg: photo,
                                     userVerify: 'false'
                                 }
+                                /* insert user to data base */
                                 fetch(`${process.env.REACT_APP_api_url}/users`, {
-                                    method: 'POST',
+                                    method: 'PUT',
                                     headers: {
                                         'content-type': 'application/json'
                                     },
@@ -63,9 +63,9 @@ const Register = () => {
                                     .then(res => res.json)
                                     .then(data => {
                                         toast.success("Register successfull")
-                                        accessToken(user.email)
+                                        /* Set user email */
+                                        setUserEmail(user?.email)
                                     }).catch(e => console.error(e))
-                                navigate('/')
                                 reset()
                             }).catch(e => console.log(e))
                         }
