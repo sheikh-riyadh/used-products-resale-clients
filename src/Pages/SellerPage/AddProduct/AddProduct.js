@@ -1,16 +1,21 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
+    const navigate = useNavigate()
+
+
     const handleOnSubmit = (data) => {
 
         /* Get form data */
         const {
-            carName, categoryName, condition, originalPrice, productImage, productLocation, resalePrice, sellerName, userYears, productDescription
+            carName, categoryName, condition, originalPrice, productLocation, resalePrice, sellerName, userYears, productDescription
         } = data
 
 
@@ -54,7 +59,13 @@ const AddProduct = () => {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(product)
-            })
+            }).then(res => res.json()).then(data => {
+                if (data.acknowledged) {
+                    toast.success('Product added succesfull')
+                    navigate('/dashboad/my-products')
+                    reset()
+                }
+            }).catch(e => console.error(e))
         }
 
     }
