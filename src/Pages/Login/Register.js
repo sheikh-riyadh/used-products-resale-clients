@@ -89,18 +89,18 @@ const Register = () => {
                     <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body text-start">
                         <div className="form-control">
                             <input {...register('name', { required: 'Field is required' })} type="name" placeholder="name" className="input input-bordered text-secondary" />
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.name?.message}</p>
+                            <p className='text-white font-medium text-start mt-1'>{errors.name?.message}</p>
                         </div>
                         <div className="form-control">
                             <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered text-secondary" />
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.email?.message}</p>
+                            <p className='text-white font-medium text-start mt-1'>{errors.email?.message}</p>
                         </div>
                         <div className="form-control">
                             <label htmlFor='userImage' className="label">
                                 Your photo
                             </label>
                             <input {...register('userImage', { required: 'Field is required' })} type="file" accept='image/*' name='userImage' />
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.userImage?.message}</p>
+                            <p className='text-white font-medium text-start mt-1'>{errors.userImage?.message}</p>
                         </div>
                         <div className="form-control">
                             <select {...register('userRole')} className='select select-bordered w-full text-secondary' defaultValue={'Seller'} >
@@ -108,11 +108,11 @@ const Register = () => {
                                 <option value="Seller">Seller</option>
                                 <option value="Buyer">Buyer</option>
                             </select>
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.userRole?.message}</p>
+                            <p className='text-white font-medium text-start mt-1'>{errors.userRole?.message}</p>
                         </div>
                         <div className="form-control">
                             <input {...register('password', { required: 'Field is required' })} type="password" placeholder="password" className="input input-bordered text-secondary" />
-                            <p className='text-red-800 font-medium text-start mt-1'>{errors.password?.message}</p>
+                            <p className='text-white font-medium text-start mt-1'>{errors.password?.message}</p>
                         </div>
                         <div>
                             <label>
