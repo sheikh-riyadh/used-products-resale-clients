@@ -18,15 +18,14 @@ const Header = () => {
     const headerItems = () => {
         return <>
             <li className='mr2 lg:mr-5'><Link to='/home'>Home</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/blogs'>Blogs</Link></li>
             {
                 user?.uid ?
                     <>
-                        <li><button>{user?.displayName}</button></li>
+
                         <li className='mr2 lg:mr-5'><Link to='/dashboad'>Dashboad</Link></li>
                         <li><label htmlFor="my-drawer-2" className=" drawer-button lg:hidden">User and buyer</label></li>
-                        <li className='mr2 lg:mr-5'><Link to='/my-products'>My products</Link></li>
-                        <li className='mr2 lg:mr-5'><Link to='/add-product'>Add product</Link></li>
-                        <li className='mr2 lg:mr-5'><Link to='/my-orders'>My orders</Link></li>
+                        <li><button>{user?.displayName}</button></li>
                         <li><button onClick={handleLogOut}>Log out</button></li>
                     </>
                     :
@@ -83,6 +82,7 @@ const Header = () => {
                                         {
                                             headerItems()
                                         }
+
                                     </ul>
                                 </div>
                                 <Link className="justify-center items-center">

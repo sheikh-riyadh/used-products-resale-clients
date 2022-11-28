@@ -3,6 +3,7 @@ import DashboadLayout from "../../Layouts/DashboadLayout";
 import Main from "../../Layouts/Main";
 import AllBuyers from "../../Pages/AdminPage/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/AdminPage/AllSellers/AllSellers";
+import Blogs from "../../Pages/Blogs/Blogs";
 import MyOrders from "../../Pages/BuyerPage/MyOrders/MyOrders";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import Home from "../../Pages/Home/Home/Home/Home";
@@ -34,9 +35,12 @@ export const router = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             }, {
-                path: '/category-products/:id',
+                path: '/category-products/:categoryName',
                 element: <PrivateRouter><CategoryProducts></CategoryProducts></PrivateRouter>,
-                loader: ({ params }) => fetch(`${process.env.REACT_APP_api_url}/category-products/${params.id}`)
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_api_url}/category-products/${params.categoryName}`)
+            }, {
+                path: '/blogs',
+                element: <Blogs></Blogs>
             }
         ]
     },
@@ -61,7 +65,7 @@ export const router = createBrowserRouter([
                 element: <SellerRouter><MyProducts></MyProducts></SellerRouter>
             }, {
                 path: '/dashboad/my-orders',
-                element: <BuyerRouter><MyOrders></MyOrders></BuyerRouter>
+                element: <MyOrders></MyOrders>
             }
         ]
     }

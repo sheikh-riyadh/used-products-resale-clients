@@ -44,13 +44,13 @@ const MyOrders = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        orders.map((order, i) => <tr
+                                        orders?.map((order, i) => <tr
                                             key={i}
                                         >
                                             <th>{i + 1}</th>
-                                            <td><img className='w-24' src={order.carImage} alt='car_image'></img></td>
-                                            <td>{order.productName}</td>
-                                            <td>{order.productPrice}</td>
+                                            <td><img className='w-24' src={order?.carImage} alt='car_image'></img></td>
+                                            <td>{order?.productName}</td>
+                                            <td>{order?.productPrice}</td>
                                         </tr>)
                                     }
                                 </tbody>

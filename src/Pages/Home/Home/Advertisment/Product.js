@@ -1,11 +1,10 @@
 import React from 'react';
 
 const Product = ({ product }) => {
-    console.log(product)
     const { carName, carPhoto, condition, resalePrice, sellerPhoto, sellerName } = product
     return (
         <div className="card bg-base-100 shadow-xl text-start">
-            <figure><img src={carPhoto} alt="Shoes" /></figure>
+            <figure><img src={carPhoto} alt="carPhoto" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{carName}</h2>
                 <div className='flex gap-3 items-center'>

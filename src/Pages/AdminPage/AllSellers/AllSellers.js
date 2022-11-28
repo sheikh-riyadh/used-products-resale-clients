@@ -29,9 +29,20 @@ const AllSellers = () => {
         return <Spinner></Spinner>
     }
 
+    const handleDelete = (id) => {
+        fetch(`${process.env.REACT_APP_api_url}/user/${id}`, {
+            method: 'DELETE'
+        }).then(res => res.json()).then(data => {
+            if (data.deletedCount > 0) {
+                toast.success("Seller deleted succesfull")
+                refetch()
+            }
+        })
+    }
+
     return (
         <div>
-            <h2 className='text-4xl font-bold my-5 lg:my-10'>All Sellers</h2>
+            <h2 className='text-4xl font-bold my-5 lg:my-10'>{sellers.length === 0 ? "No seller found" : "All Sellers"}</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -52,7 +63,7 @@ const AllSellers = () => {
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
                                 <td><button onClick={() => handleVerify(seller._id)} className='hover:text-gray-100 bg-gradient-to-r from-green-300 to-green-500 text-white btn border-0' disabled={seller.userVerify === 'true'}>{seller.userVerify === 'true' ? 'verified' : 'Make seller verify'}</button></td>
-                                <td><button className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Delete</button></td>
+                                <td><button onClick={() => handleDelete(seller._id)} className='hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>

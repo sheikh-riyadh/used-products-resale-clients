@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
-import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { useToken } from '../../Hook/useToken';
+
 const googlePrivider = new GoogleAuthProvider()
-const githubProvider = new GithubAuthProvider()
+
 
 const Login = () => {
     useTitle('login')
@@ -28,12 +29,12 @@ const Login = () => {
     } */
 
     if (token) {
-        navigate(from, { replace: true })
+
     }
     /* Get token from using useToken hook */
     const handleOnSubmit = (data) => {
         const { email, password } = data
-
+        navigate(from, { replace: true })
         /* Create user here */
         loginUser(email, password).then(res => {
             setUserEmail(email)
@@ -54,15 +55,26 @@ const Login = () => {
     /* Sing in with google here */
     const handleSignInWithGoogle = () => {
         signInWithProvider(googlePrivider).then(res => {
-            navigate(from, { replace: true })
-        }).catch(e => console.log(e))
-    }
+            const user = {
+                name: res?.user?.displayName,
+                email: res?.user?.email,
+                userRole: "Buyer",
+                userImg: res.user.photoURL,
+                userVerify: "false"
 
+            }
 
-    /* Sign in with github here */
-    const handleSignInWithGithub = () => {
-        signInWithProvider(githubProvider).then(res => {
-
+            setUserEmail(res?.user?.email)
+            /* Save user details here */
+            fetch(`${process.env.REACT_APP_api_url}/users`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            }).then(res => res.json()).then(data => {
+                navigate(from, { replace: true })
+            })
         }).catch(e => console.log(e))
     }
     return (
@@ -92,8 +104,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className=' text-white flex flex-col lg:flex-row justify-center gap-5 label-text-alt text-xl'>
-                        <button onClick={handleSignInWithGoogle} className='flex justify-center items-center'><FaGoogle className='mr-3'></FaGoogle> continue with</button>
-                        <button onClick={handleSignInWithGithub} className='flex justify-center items-center'><FaGithub className='mr-3'></FaGithub> continue with</button>
+                        <button onClick={handleSignInWithGoogle} className='flex justify-center items-center'><FaGoogle className='mr-3'></FaGoogle> continue with goole</button>
                     </div>
                 </div>
             </div>

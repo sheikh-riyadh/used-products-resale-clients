@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
 
+    /* Sigin with social media */
     const signInWithProvider = (provider) => {
         setLoading(true)
         return signInWithPopup(auth, provider)

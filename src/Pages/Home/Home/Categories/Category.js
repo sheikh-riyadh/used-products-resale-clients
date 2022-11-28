@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const Category = ({ category }) => {
-    const { categoryName, image, rating, _id } = category
+    const { categoryName, image, rating } = category
     return (
         <div>
 
@@ -21,7 +21,7 @@ const Category = ({ category }) => {
                         {rating}
                     </p>
                     <div className="card-actions">
-                        <Link to={`/category-products/${_id}`} className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0 w-full">Buy Now</Link>
+                        <Link to={`/category-products/${categoryName}`} className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0 w-full">Buy Now</Link>
                     </div>
                 </div>
             </div>

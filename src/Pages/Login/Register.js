@@ -2,15 +2,17 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTitle } from '../../Hook/userTitle';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import { useToken } from '../../Hook/useToken';
+import { GoogleAuthProvider } from 'firebase/auth';
+const googlePrivider = new GoogleAuthProvider()
 
 
 const Register = () => {
     useTitle('register')
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const [userEmail, setUserEmail] = useState('')
@@ -79,6 +81,32 @@ const Register = () => {
             })
     }
 
+    /* Sing in with google here */
+    const handleSignInWithGoogle = () => {
+        signInWithProvider(googlePrivider).then(res => {
+            const user = {
+                name: res?.user?.displayName,
+                email: res?.user?.email,
+                userRole: "Buyer",
+                userImg: res.user.photoURL,
+                userVerify: "false"
+
+            }
+
+            setUserEmail(res?.user?.email)
+            /* Save user details here */
+            fetch(`${process.env.REACT_APP_api_url}/users`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            }).then(res => res.json()).then(data => {
+                navigate('/')
+            })
+        }).catch(e => console.log(e))
+    }
+
     return (
         <div className="hero min-h-screen my-10">
             <div className="hero-content flex-col bg-secondary text-base-100 shadow-lg rounded-lg mx-auto w-[345px] lg:w-[400px]">
@@ -125,8 +153,7 @@ const Register = () => {
                         </div>
                     </form>
                     <div className=' text-white flex justify-center gap-5 label-text-alt text-xl'>
-                        <button className='flex justify-center items-center'><FaGoogle className='mr-4'></FaGoogle> continue with</button>
-                        <button className='flex justify-center items-center'><FaGithub className='mr-4'></FaGithub> continue with</button>
+                        <button onClick={handleSignInWithGoogle} className='flex justify-center items-center'><FaGoogle className='mr-4'></FaGoogle> continue with goole</button>
                     </div>
                 </div>
             </div>
