@@ -12,7 +12,7 @@ const Blogs = () => {
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-2/12 m-0 p-0"></div>
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-1/12 m-0 p-0"></div>
             </div>
-            <div className='text-start my-5 lg:my-16'>
+            <div className='text-start my-5 lg:my-10'>
                 <img src={react_state} alt="react_state" />
                 <div className='p-5 text-start'>
                     <h2 className='text-3xl font-medium'> What are the different ways to manage a state in a React application?</h2>
@@ -33,17 +33,17 @@ const Blogs = () => {
                         In many cases, a lot of major parts of our application rely upon accessing URL state. Try to imagine building a blog without being able to fetch a post based off of its slug or id that is located in the URL!</p>
                 </div>
             </div>
-            <div className='text-start my-5 lg:my-16'>
+            <div className='text-start p-5 my-5 lg:my-10'>
                 <img className='w-full' src={inheritance} alt="inheritance" />
                 <p className='text-3xl font-medium'>How does prototypical inheritance work?</p>
                 <p className='my-2'>The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the Prototype of an object, we use Object. getPrototypeOf and Object.</p>
             </div>
-            <div className='text-start my-5 lg:my-16'>
+            <div className='text-start p-5 my-5 lg:my-10'>
                 <img className='w-full' src={unit_test} alt="unit_test" />
                 <p className='text-3xl font-medium'>What is a unit test? Why should we write unit tests?</p>
                 <p className='my-2'>The main objective of unit testing is to isolate written code to test and determine if it works as intended. Unit testing is an important step in the development process, because if done correctly, it can help detect early flaws in code which may be more difficult to find in later testing stages.</p>
             </div>
-            <div className='text-start my-5 lg:my-16'>
+            <div className='text-start p-5 my-5 lg:my-10'>
                 <img className='w-full' src={react} alt="react" />
                 <p className='text-3xl font-medium'>React vs. Angular vs. Vue?</p>
                 <p><strong>React</strong> can be used as a UI library to render elements, without enforcing a specific project structure, and that’s why it’s not strictly a framework.</p>
@@ -55,12 +55,12 @@ const Blogs = () => {
                 <p className='my-2'><strong>Angular</strong> In this article, I’m discussing Angular 2, and not the first version of the framework which is now known as AngularJS.</p>
                 <p className='my-2'>AngularJS, the original framework, is an MVC Model-View-Controller framework. But in Angular 2, there’s no strict association with MV*-patterns as it is also component-based..</p>
             </div>
-            <div className='text-start my-5 lg:my-16'>
+            <div className='text-start p-5 my-5 lg:my-10'>
                 <h1 className='my-5 text-3xl font-medium'>Popularity</h1>
                 <p><strong>React</strong> React is one of the most popular JavaScript projects with 160k stars on GitHub. It’s developed and maintained by Facebook, and it’s used internally in many of their projects. Additionally, it powers over 2 million websites, according to BuiltWith‘s usage statistics.</p>
-                <p className='my5'><strong>Vue</strong> Out of the three frameworks, Vue has the most stars on GitHub, with 176k stars. The project is developed and led by ex-Googler Evan You. It’s a very strong, independent project in the open-source community and is used by over 1 million websites, according to BuiltWith.</p>
+                <p className='my-5'><strong>Vue</strong> Out of the three frameworks, Vue has the most stars on GitHub, with 176k stars. The project is developed and led by ex-Googler Evan You. It’s a very strong, independent project in the open-source community and is used by over 1 million websites, according to BuiltWith.</p>
 
-                <p className='my5'><strong>Angular</strong> Angular is developed by Google, but surprisingly it’s not used in some of their flagship products such as Search or Youtube. It’s often used in enterprise projects, and it powers over 97,000 websites based on BuiltWith‘s data.
+                <p className='my-5'><strong>Angular</strong> Angular is developed by Google, but surprisingly it’s not used in some of their flagship products such as Search or Youtube. It’s often used in enterprise projects, and it powers over 97,000 websites based on BuiltWith‘s data.
                     <br />
                     It’s the least starred among the three frameworks, with 68k stars on GitHub. However, when switching from Angular 1 to Angular 2, they created an entirely new repository instead of continuing the AngularJS project, which also has 59k stars.
                 </p>
