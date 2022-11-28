@@ -68,3 +68,44 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+WEBSITE FEATURES DETAILS
+=========================
+
+Technology used this webiste
+=========   ****   =============
+1). React js
+2). Node js
+3). Mongodb
+4). Express js
+
+CSS framework
+====== * ======
+1). Tailwind
+        1.5 DaisyUI
+
+Authentication
+======= * =======
+1). Google authentication
+
+Features
+===*====
+There are 3 type of user
+    1. Admin
+    2. Buyer
+    3. Seller
+
+1.Admin: Admin can handle all sellers and all buyers if admin want to delete any seller or any buyer they can do that.
+
+2.Buyer: Buyer can purchage all product which he/she want 
+
+3.Seller: Seller can add products and delete product and if seller want to display product with advertisment section the product which he/she want they can display. also seller can delete any product 
+
+Authentication
+==============
+sellers or buyers can create account with email and password and if sellers or buyer want to create account with google authentication they can do that
+
+Live website: https://car-dealer-7a2f7.web.app/
+
+

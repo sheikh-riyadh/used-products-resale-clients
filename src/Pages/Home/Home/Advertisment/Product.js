@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Product = ({ product }) => {
-    const { carName, carPhoto, condition, resalePrice, sellerPhoto, sellerName } = product
+    const { carName, carPhoto, condition, resalePrice, sellerPhoto, sellerName, categoryName } = product
     return (
         <div className="card bg-base-100 shadow-xl text-start">
             <figure><img src={carPhoto} alt="carPhoto" /></figure>
@@ -12,7 +12,8 @@ const Product = ({ product }) => {
                     <span>{sellerName}</span>
                 </div>
                 <p>Condition: {condition}</p>
-                <p>Price: {resalePrice}</p>
+                <p>Price: ${resalePrice}</p>
+                <p>Category: {categoryName}</p>
                 <div className="card-actions justify-end">
                     <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 w-full text-white btn border-0">Buy Now</button>
                 </div>
