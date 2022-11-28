@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
 const Product = ({ product, setModalDetails }) => {
-    const { categoryName, isVarify, postTime, userYears, originalPrice, resalePrice, productLocation, sellerName, carName, sellerPhoto, carPhoto, _id } = product
+    const { categoryName, isVarify, postTime, userYears, originalPrice, resalePrice, productLocation, sellerName, carName, sellerPhoto, carPhoto } = product
 
 
 

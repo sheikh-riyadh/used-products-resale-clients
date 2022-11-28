@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboadLayout from "../../Layouts/DashboadLayout";
 import Main from "../../Layouts/Main";
+import ErrorPage from "../../Pages/404 page/ErrorPage";
 import AllBuyers from "../../Pages/AdminPage/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/AdminPage/AllSellers/AllSellers";
 import Blogs from "../../Pages/Blogs/Blogs";
@@ -12,7 +13,6 @@ import Register from "../../Pages/Login/Register";
 import AddProduct from "../../Pages/SellerPage/AddProduct/AddProduct";
 import MyProducts from "../../Pages/SellerPage/MyProducts/MyProducts";
 import AdminRouter from "../AdminRouter/AdminRouter";
-import BuyerRouter from "../BuyerRouter/BuyerRouter";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import SellerRouter from "../SellerRouter/SellerRouter";
 
@@ -41,6 +41,10 @@ export const router = createBrowserRouter([
             }, {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
         ]
     },
