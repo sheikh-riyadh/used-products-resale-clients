@@ -24,7 +24,7 @@ const Header = () => {
                     <>
 
                         <li className='mr2 lg:mr-5'><Link to='/dashboad'>Dashboad</Link></li>
-                        <li><label htmlFor="my-drawer-2" className=" drawer-button lg:hidden">User and buyer</label></li>
+                        <li><label htmlFor="my-drawer-2" className=" drawer-button lg:hidden">Details</label></li>
                         <li><button>{user?.displayName}</button></li>
                         <li><button onClick={handleLogOut}>Log out</button></li>
                     </>

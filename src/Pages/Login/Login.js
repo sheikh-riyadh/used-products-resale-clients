@@ -37,8 +37,9 @@ const Login = () => {
         navigate(from, { replace: true })
         /* Create user here */
         loginUser(email, password).then(res => {
-            setUserEmail(email)
-            reset()
+            setUserEmail(res?.user?.email)
+            console.log(userEmail)
+            // reset()
         }).catch(e => {
             if (e.message === 'Firebase: Error (auth/wrong-password).') {
                 toast.error('Incorrect password')
