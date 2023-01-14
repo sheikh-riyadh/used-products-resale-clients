@@ -34,9 +34,10 @@ const Login = () => {
     /* Get token from using useToken hook */
     const handleOnSubmit = (data) => {
         const { email, password } = data
-        navigate(from, { replace: true })
+
         /* Create user here */
         loginUser(email, password).then(res => {
+            navigate(from, { replace: true })
             setUserEmail(res?.user?.email)
             console.log(userEmail)
             // reset()
