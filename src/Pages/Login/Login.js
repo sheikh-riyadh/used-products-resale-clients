@@ -13,20 +13,20 @@ const googlePrivider = new GoogleAuthProvider()
 
 const Login = () => {
     useTitle('login')
+    let demoemail;
     const { loginUser, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
-    const [userEmail, setUserEmail] = useState('')
 
 
+    const [userEmail, setUserEmail] = useState('johndoe1@gmail.com')
     const [token] = useToken(userEmail)
+
+    console.log(demoemail)
+
     /* Get location */
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/'
-
-    /* if (tokenLoading) {
-        return;
-    } */
 
     if (token) {
 
@@ -38,8 +38,7 @@ const Login = () => {
         /* Create user here */
         loginUser(email, password).then(res => {
             navigate(from, { replace: true })
-            setUserEmail(res?.user?.email)
-            console.log(userEmail)
+            setUserEmail('')
             // reset()
         }).catch(e => {
             if (e.message === 'Firebase: Error (auth/wrong-password).') {
@@ -66,7 +65,7 @@ const Login = () => {
 
             }
 
-            setUserEmail(res?.user?.email)
+            userEmail(res?.user?.email)
             /* Save user details here */
             fetch(`${process.env.REACT_APP_api_url}/users`, {
                 method: 'PUT',
@@ -86,6 +85,10 @@ const Login = () => {
                     <h1 className="text-4xl lg:text-5xl font-bold">Login</h1>
                 </div>
                 <div>
+                    <h1>Seller email:johndoe@gmail.com</h1>
+                    <h1>password:123123</h1>
+                    <h1>Buyer email:johndoe1@gmail.com</h1>
+                    <h1>password:123123</h1>
                     <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body text-start">
                         <div className="form-control">
                             <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered text-secondary" />

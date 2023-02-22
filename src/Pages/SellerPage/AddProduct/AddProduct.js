@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const AddProduct = () => {
+    const [loading, setLoading] = useState(false)
     const { user } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
@@ -24,6 +25,7 @@ const AddProduct = () => {
         const formData = new FormData()
         formData.append('image', image)
 
+        setLoading(true)
         fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageBB_api}`, {
             method: 'POST',
             body: formData
@@ -53,6 +55,7 @@ const AddProduct = () => {
 
         /* Save product to database */
         const saveProduct = (product) => {
+            setLoading(true)
             fetch(`${process.env.REACT_APP_api_url}/category`, {
                 method: 'POST',
                 headers: {
@@ -61,11 +64,15 @@ const AddProduct = () => {
                 body: JSON.stringify(product)
             }).then(res => res.json()).then(data => {
                 if (data.acknowledged) {
+                    setLoading(false)
                     toast.success('Product added succesfull')
                     navigate('/dashboad/my-products')
                     reset()
                 }
-            }).catch(e => console.error(e))
+            }).catch(e => {
+                setLoading(false)
+                console.error(e)
+            })
         }
 
     }
@@ -134,7 +141,7 @@ const AddProduct = () => {
                             <p className='text-white font-medium text-start mt-1'>{errors.productDescription?.message}</p>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">Post</button>
+                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">{loading ? "Processing..." : "Post"}</button>
                         </div>
                     </div>
                 </form>

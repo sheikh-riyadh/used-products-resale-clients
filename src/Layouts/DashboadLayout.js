@@ -19,6 +19,7 @@ const DashboadLayout = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <Outlet></Outlet>
+                    <li className='my-12 list-none'><label htmlFor="my-drawer-2" className="mt-12 drawer-button bg-primary px-5 py-3 rounded-md text-white lg:hidden">Details</label></li>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

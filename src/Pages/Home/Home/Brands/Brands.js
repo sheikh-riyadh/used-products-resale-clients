@@ -14,7 +14,7 @@ const Brands = () => {
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-2/12 m-0 p-0"></div>
                 <div className="divider before:bg-primary after:bg-secondary mx-auto w-1/12 m-0 p-0"></div>
             </div>
-            <div className='grid grid-cols-1 gap-7 mt-5 md:grid-cols-2 lg:grid-cols-5 justify-items-center'>
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-7 mt-5 lg:grid-cols-5 justify-items-center'>
                 <img className="p-5 w-full hover:shadow-md hover:rounded-md" src={Brand1} alt="Brands" />
                 <img className="p-5 w-full hover:shadow-md hover:rounded-md" src={Brand2} alt="Brands" />
                 <img className="p-5 w-full hover:shadow-md hover:rounded-md" src={Brand3} alt="Brands" />
