@@ -11,6 +11,7 @@ const googlePrivider = new GoogleAuthProvider()
 
 
 const Register = () => {
+    const [loading, setLoading] = useState(false)
     useTitle('register')
     const { createUser, updateUserProfile, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -25,6 +26,7 @@ const Register = () => {
     }
 
     const handleOnSubmit = (data) => {
+        setLoading(true)
         const { email, password, userImage, name, userRole } = data
 
         /* Get image from form */
@@ -64,25 +66,37 @@ const Register = () => {
                                 })
                                     .then(res => res.json)
                                     .then(data => {
+                                        setLoading(false)
                                         toast.success("Register successfull")
                                         /* Set user email */
                                         setUserEmail(user?.email)
-                                    }).catch(e => console.error(e))
+                                    }).catch(e => {
+                                        setLoading(false)
+                                        console.error(e)
+                                    })
                                 reset()
-                            }).catch(e => console.log(e))
+                            }).catch(e => {
+                                setLoading(false)
+                                console.log(e)
+                            })
                         }
-                    }).catch(e => console.log(e))
+                    }).catch(e => {
+                        setLoading(false)
+                        console.log(e)
+                    })
 
             }).catch(e => {
                 if (e.message === 'Firebase: Error (auth/email-already-in-use).') {
                     toast.error('User already registered')
                     reset()
+                    setLoading(false)
                 }
             })
     }
 
     /* Sing in with google here */
     const handleSignInWithGoogle = () => {
+        setLoading(true)
         signInWithProvider(googlePrivider).then(res => {
             const user = {
                 name: res?.user?.displayName,
@@ -102,9 +116,13 @@ const Register = () => {
                 },
                 body: JSON.stringify(user)
             }).then(res => res.json()).then(data => {
+                setLoading(false)
                 navigate('/')
             })
-        }).catch(e => console.log(e))
+        }).catch(e => {
+            setLoading(false)
+            console.log(e)
+        })
     }
 
     return (
@@ -149,7 +167,7 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">Register</button>
+                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">{loading ? "Loading..." : "Register"}</button>
                         </div>
                     </form>
                     <div className=' text-white flex justify-center gap-5 label-text-alt text-xl'>

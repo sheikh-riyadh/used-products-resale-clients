@@ -13,7 +13,7 @@ const googlePrivider = new GoogleAuthProvider()
 
 const Login = () => {
     useTitle('login')
-    let demoemail;
+    const [loading, setLoading] = useState(false)
     const { loginUser, signInWithProvider } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
@@ -21,7 +21,7 @@ const Login = () => {
     const [userEmail, setUserEmail] = useState('johndoe1@gmail.com')
     const [token] = useToken(userEmail)
 
-    console.log(demoemail)
+
 
     /* Get location */
     const location = useLocation()
@@ -33,21 +33,26 @@ const Login = () => {
     }
     /* Get token from using useToken hook */
     const handleOnSubmit = (data) => {
+        setLoading(true)
         const { email, password } = data
 
         /* Create user here */
         loginUser(email, password).then(res => {
+            setLoading(false)
             navigate(from, { replace: true })
             setUserEmail('')
             // reset()
         }).catch(e => {
             if (e.message === 'Firebase: Error (auth/wrong-password).') {
                 toast.error('Incorrect password')
+                setLoading(false)
             } else if (e.message === 'Firebase: Error (auth/user-not-found).') {
                 toast.error('User not found please register')
+                setLoading(false)
             }
             console.log(e)
             reset()
+            setLoading(false)
         })
 
 
@@ -55,6 +60,7 @@ const Login = () => {
 
     /* Sing in with google here */
     const handleSignInWithGoogle = () => {
+        setLoading(true)
         signInWithProvider(googlePrivider).then(res => {
             const user = {
                 name: res?.user?.displayName,
@@ -75,8 +81,13 @@ const Login = () => {
                 body: JSON.stringify(user)
             }).then(res => res.json()).then(data => {
                 navigate(from, { replace: true })
+                setLoading(false)
             })
-        }).catch(e => console.log(e))
+        }).catch(e => {
+            setLoading(false)
+            console.log(e)
+
+        })
     }
     return (
         <div className="hero min-h-screen">
@@ -105,7 +116,7 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">Login</button>
+                            <button className="hover:text-gray-100 bg-gradient-to-r from-primary to-red-500 text-white btn border-0">{loading ? "Loading..." : "Login"}</button>
                         </div>
                     </form>
                     <div className=' text-white flex flex-col lg:flex-row justify-center gap-5 label-text-alt text-xl'>
