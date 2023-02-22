@@ -96,10 +96,12 @@ const Login = () => {
                     <h1 className="text-4xl lg:text-5xl font-bold">Login</h1>
                 </div>
                 <div>
-                    <h1>Seller email:johndoe@gmail.com</h1>
+                    <h1>Seller:johndoe@gmail.com</h1>
                     <h1>password:123123</h1>
-                    <h1>Buyer email:johndoe1@gmail.com</h1>
+                    <h1>Buyer:johndoe1@gmail.com</h1>
                     <h1>password:123123</h1>
+                    <h1>Admin:demo@gmail.com</h1>
+                    <h1>password:!@#3210</h1>
                     <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body text-start">
                         <div className="form-control">
                             <input {...register('email', { required: 'Field is required' })} type="email" placeholder="email" className="input input-bordered text-secondary" />
