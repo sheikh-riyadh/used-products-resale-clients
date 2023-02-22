@@ -55,7 +55,6 @@ const AddProduct = () => {
 
         /* Save product to database */
         const saveProduct = (product) => {
-            setLoading(true)
             fetch(`${process.env.REACT_APP_api_url}/category`, {
                 method: 'POST',
                 headers: {
